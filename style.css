@@ -50,7 +50,6 @@ a { color: inherit; }
 .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 section { padding: 72px 0; }
 
-/* Кнопки */
 .btn {
   display: inline-block;
   background: var(--red);
@@ -83,7 +82,6 @@ section { padding: 72px 0; }
   outline-offset: 3px;
 }
 
-/* Шапка */
 header {
   position: sticky;
   top: 0;
@@ -160,7 +158,6 @@ nav a:hover { color: var(--ink); }
   }
 }
 
-/* Hero */
 .hero {
   position: relative;
   overflow: hidden;
@@ -190,7 +187,6 @@ nav a:hover { color: var(--ink); }
   opacity: .9;
 }
 
-/* Таймер */
 .next {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -242,7 +238,6 @@ nav a:hover { color: var(--ink); }
   .clock b { font-size: 32px; }
 }
 
-/* Таблицы */
 .cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -319,7 +314,6 @@ nav a:hover { color: var(--ink); }
   color: var(--muted);
 }
 
-/* Золотой номер только у настоящего лидера, а не у первой видимой строки */
 .row.is-leader .pos { color: var(--amber); }
 
 .row .name-wrap {
@@ -355,7 +349,6 @@ nav a:hover { color: var(--ink); }
   height: 3px;
 }
 
-/* Календарь и фильтры */
 .sec-head {
   display: flex;
   justify-content: space-between;
@@ -473,7 +466,6 @@ button.race:hover {
   .race { grid-template-columns: 1fr; gap: 6px; }
 }
 
-/* Блок сезона 2027 */
 .future-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -565,7 +557,6 @@ button.race:hover {
   letter-spacing: .05em;
 }
 
-/* Модальное окно */
 .modal {
   background: var(--panel);
   color: var(--ink);
@@ -687,7 +678,6 @@ button.race:hover {
   font-size: 14px;
 }
 
-/* Карточка трассы */
 .track-hero {
   margin: -32px -32px 22px;
   height: 220px;
@@ -750,7 +740,6 @@ button.race:hover {
   color: var(--ink);
 }
 
-/* Сравнение пилотов */
 .cmp-table {
   width: 100%;
   border-collapse: collapse;
@@ -790,14 +779,13 @@ button.race:hover {
   --line: #d7d7d0;
   --ink: #15161a;
   --muted: #5b606a;
-  --amber: #a36d00; /* более тёмный янтарь, чтобы текст читался на белом */
+  --amber: #a36d00; 
 }
 
 :root[data-theme="light"] header {
   background: rgba(244, 244, 241, .92);
 }
 
-/* Адаптив карточки трассы */
 @media (max-width: 640px) {
   .track-hero {
     margin: -32px -20px 18px;
@@ -805,7 +793,6 @@ button.race:hover {
   }
 }
 
-/* Подвал */
 footer {
   border-top: 1px solid var(--line);
   padding: 30px 0;
