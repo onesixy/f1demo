@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pit Wall — всё о Формуле 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="logo" href="#top">Pit<i>Wall</i></a>
+      <nav aria-label="Основная навигация">
+        <a href="#next">Отсчёт</a>
+        <a href="#standings">Зачёт 2026</a>
+        <a href="#calendar">Календарь</a>
+        <a href="#season2027">Сезон 2027</a>
+        <a href="#news">Новости</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" type="button">Светлая тема</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="wrap">
+        <h1>Скорость.<br>Стратегия.<br>Финиш.</h1>
+        <p>Развязка чемпионата 2026 и курс на сезон 2027: обратный отсчёт, личный зачёт, кубок конструкторов и календарь этапов.</p>
+        <div class="cta">
+          <a class="btn" href="#standings">Зачёт 2026</a>
+          <a class="btn btn-outline" href="#season2027">Что ждёт в 2027</a>
+        </div>
+      </div>
+    </div>
+    <div class="flag" aria-hidden="true"></div>
+
+    <section id="next">
+      <div class="wrap">
+        <div class="next">
+          <div>
+            <small id="nxLabel">Ближайшее событие</small>
+            <h2 id="nxName">Загрузка...</h2>
+            <span id="nxDate" class="muted"></span>
+          </div>
+          <div class="clock" id="clock">
+            <div><b>--</b><span>дней</span></div>
+            <div><b>--</b><span>часов</span></div>
+            <div><b>--</b><span>минут</span></div>
+            <div><b>--</b><span>секунд</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="standings" class="alt-bg">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Личный и командный зачёт · 2026</h2>
+          <span class="muted hint-text">Нажмите на пилота или команду — откроется статистика, биография и новости</span>
+        </div>
+        <div class="cols">
+          <div class="table">
+            <h3>Пилоты (2026)</h3>
+            <div class="table-tools">
+              <input id="driverSearch" type="search" placeholder="Поиск: пилот или команда" aria-label="Поиск пилота или команды">
+              <select id="driverSort" class="ui-select" aria-label="Сортировка пилотов">
+                <option value="points">По очкам</option>
+                <option value="name">По имени</option>
+                <option value="team">По команде</option>
+              </select>
+            </div>
+            <div id="drivers"></div>
+          </div>
+          <div class="table">
+            <h3>Кубок конструкторов (2026)</h3>
+            <div id="teams"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calendar">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>Календарь этапов</h2>
+          <div class="filters">
+            <div class="season-switch" id="seasonSwitch">
+              <button class="filter-btn" data-season="2026" aria-pressed="false">2026</button>
+              <button class="filter-btn" data-season="2027" aria-pressed="false">2027</button>
+            </div>
+            <div class="cal-filters" id="calFilters">
+              <button class="filter-btn" data-filter="all" aria-pressed="false">Все</button>
+              <button class="filter-btn" data-filter="upcoming" aria-pressed="false">Предстоящие</button>
+              <button class="filter-btn" data-filter="sprint" aria-pressed="false">Со спринтом</button>
+            </div>
+          </div>
+        </div>
+        <p class="muted hint-text">Нажмите на этап — откроется история трассы, её фото и факты.</p>
+        <div class="cal" id="cal"></div>
+      </div>
+    </section>
+
+    <section id="season2027" class="alt-bg">
+      <div class="wrap">
+        <h2>На будущий сезон: что ждёт в 2027</h2>
+        <div class="future-grid" id="futureGrid"></div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="wrap">
+        <h2>Аналитика и новости</h2>
+        <div class="news" id="newsGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="infoModal" class="modal" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal" aria-label="Закрыть">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <footer>
+    <div class="wrap">
+      <span>Pit Wall &copy; 2026</span>
+      <span>Неофициальный фан-проект. Не связан с Formula 1, FIA и командами. Фото: Wikipedia / Wikimedia Commons.</span>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
