@@ -1,4 +1,3 @@
-// ===== ДАННЫЕ ПРОЕКТА PIT WALL =====
 const TEAMS_2026 = [
   {
     name: "Mercedes",
@@ -269,7 +268,7 @@ const DRIVERS_2026 = [
   { name: "Лэнс Стролл", team: "Aston Martin", points: 0, number: "18", country: "Канада", stats: { pos2026: "P22", points2026: "0", gap: "-402", team: "Aston Martin" }, bio: "Канадский пилот Aston Martin.", news: [{ title: "Стролл и Aston Martin готовятся к финалу в Абу-Даби", date: "Ноябрь 2026", text: "Команда нацелена на более сильные результаты в следующем сезоне." }] },
   { name: "Валттери Боттас", team: "Cadillac", points: 0, number: "77", country: "Финляндия", stats: { pos2026: "P23", points2026: "0", gap: "-402", team: "Cadillac" }, bio: "Финский гонщик Cadillac с многолетним опытом побед и поулов в Формуле 1.", news: [{ title: "Боттас помогает Cadillac в развитии машины", date: "Ноябрь 2026", text: "Опыт Валттери Боттаса важен для настройки шасси на дистанции." }] },
   { name: "Серхио Перес", team: "Cadillac", points: 0, number: "11", country: "Мексика", stats: { pos2026: "P24", points2026: "0", gap: "-402", team: "Cadillac" }, bio: "Мексиканский пилот Cadillac, многократный победитель Гран-при Формулы 1.", news: [{ title: "Перес работает над темпом Cadillac на финальных этапах", date: "Ноябрь 2026", text: "Серхио Перес привносит в команду большой опыт работы с шинами." }] },
-  { name: "Рафаэл Камара", team: "Cadillac", points: 0, number: "99", country: "Бразилия", stats: { pos2026: "P25", points2026: "0", gap: "-402", team: "Cadillac" }, bio: "Бразильский пилот состава Cadillac в сезоне 2026.", news: [{ title: "Камара получает опыт на трассах чемпионата мира", date: "Ноябрь 2026", text: "Гонщик продолжает накатывать километры в составе американской команды." }] }
+  { name: "Рафаэл Камара", team: "Haas", points: 0, number: "51", country: "Бразилия", stats: { pos2026: "P25", points2026: "0", gap: "-402", team: "Cadillac" }, bio: "Бразильский пилот состава Cadillac в сезоне 2026.", news: [{ title: "Камара получает опыт на трассах чемпионата мира", date: "Ноябрь 2026", text: "Гонщик продолжает накатывать километры в составе американской команды." }] }
 ];
 
 const CALENDAR_2026 = [
@@ -277,7 +276,6 @@ const CALENDAR_2026 = [
   { date: "2026-12-06T13:00:00Z", name: "Гран-при Абу-Даби", place: "Яс-Марина", sprint: false }
 ];
 
-// Чтобы отметить спринт-уикенд, поменяйте sprint: false на sprint: true
 const CALENDAR_2027 = [
   { date: "2027-02-24T08:00:00Z", name: "Предсезонные тесты (День 1)", place: "Сахир, Бахрейн", sprint: false },
   { date: "2027-03-14T15:00:00Z", name: "Гран-при Бахрейна", place: "Сахир", sprint: false },
@@ -359,10 +357,7 @@ const NEWS_DATA = [
   }
 ];
 
-// ===== ТРАССЫ =====
-// Ключ — точное название этапа из CALENDAR_2026 / CALENDAR_2027.
-// wiki — название статьи на английской Википедии (берётся из URL), по нему подтягивается фото.
-// Если wiki: null, фото не подгружается, а в карточке показывается заглушка.
+
 const TRACKS = {
   "Предсезонные тесты (День 1)": {
     wiki: "Bahrain_International_Circuit",
@@ -765,9 +760,7 @@ const TRACKS = {
   }
 };
 
-// ===== ССЫЛКИ НА ВИКИПЕДИЮ =====
-// Ключ — точное имя пилота или команды. Если имени нет в списке,
-// ссылка ведёт на поиск по Википедии.
+
 const WIKI_LINKS = {
   "Mercedes": "Mercedes-AMG_Petronas_F1_Team",
   "Ferrari": "Scuderia_Ferrari",
@@ -807,9 +800,7 @@ const WIKI_LINKS = {
   "Серхио Перес": "Sergio_Pérez"
 };
 
-// ===== ФОТО ИЗ ВИКИПЕДИИ =====
-// Ключ — имя пилота или команды, значение — название статьи.
-// Фото подгружаются из Википедии (лицензии Wikimedia Commons).
+
 const PHOTO_WIKI = {
   "Mercedes": "Mercedes-AMG_Petronas_F1_Team",
   "Ferrari": "Scuderia_Ferrari",
