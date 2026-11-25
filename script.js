@@ -1,11 +1,8 @@
-// ===== PIT WALL — script.js =====
-
-// ---------- Утилиты ----------
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const now = () => new Date();
 const TZ = "Asia/Almaty";
-const LIVE_MS = 3 * 36e5; // окно «гонка идёт» — 3 часа от старта
+const LIVE_MS = 3 * 36e5; 
 
 const esc = (v) =>
   String(v ?? "").replace(/[&<>"']/g, (c) => ({
@@ -18,7 +15,6 @@ const TRACK_INFO = typeof TRACKS !== "undefined" ? TRACKS : {};
 const WIKI = typeof WIKI_LINKS !== "undefined" ? WIKI_LINKS : {};
 const PHOTOS = typeof PHOTO_WIKI !== "undefined" ? PHOTO_WIKI : {};
 
-// Ссылка на статью; если статьи нет в WIKI_LINKS, открываем поиск по Википедии
 function wikiUrl(name) {
   const page = WIKI[name] || `${name} Formula One`;
   return WIKI[name]
@@ -26,7 +22,6 @@ function wikiUrl(name) {
     : `https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(page)}`;
 }
 
-// ---------- Настройки в localStorage ----------
 const store = {
   get(key, fallback) {
     try {
@@ -39,7 +34,6 @@ const store = {
     try {
       localStorage.setItem(`pitwall:${key}`, value);
     } catch {
-      /* приватный режим — просто не сохраняем */
     }
   }
 };
@@ -52,10 +46,8 @@ const state = {
   query: ""
 };
 
-// ---------- Вычисляемые данные ----------
 const DRIVERS = [...DRIVERS_2026].sort((a, b) => b.points - a.points);
 
-// Очки команд считаются из пилотов, поле points в TEAMS_2026 не используется
 const TEAMS = TEAMS_2026.map((t) => {
   const squad = DRIVERS_2026.filter((d) => d.team === t.name);
   return { ...t, squad, points: squad.reduce((sum, d) => sum + d.points, 0) };
@@ -63,7 +55,6 @@ const TEAMS = TEAMS_2026.map((t) => {
 
 const CALENDARS = { "2026": CALENDAR_2026, "2027": CALENDAR_2027 };
 
-// ---------- Тема ----------
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
   $("#themeBtn").textContent = theme === "light" ? "Тёмная тема" : "Светлая тема";
@@ -75,7 +66,6 @@ $("#themeBtn").addEventListener("click", () => {
   applyTheme(state.theme);
 });
 
-// ---------- Модальное окно ----------
 const modal = $("#infoModal");
 const modalBody = $("#modalBody");
 
@@ -89,10 +79,8 @@ modal.addEventListener("click", (e) => {
   if (e.target === modal) modal.close();
 });
 
-// ---------- Фото из Википедии (общее для трасс, пилотов и команд) ----------
 const wikiCache = new Map();
-let photoRequest = 0; // защита от гонки запросов при быстром переключении
-
+let photoRequest = 0;
 async function getWikiImage(title) {
   if (wikiCache.has(title)) return wikiCache.get(title);
   const res = await fetch(
@@ -105,7 +93,6 @@ async function getWikiImage(title) {
   return src;
 }
 
-// Блок-заглушка для фото; сам файл подгружается через loadHeroPhoto
 function heroHtml(title) {
   return title
     ? `<div class="track-hero" id="heroPhoto"><span class="track-hero-empty">Загружаем фото…</span></div>`
@@ -129,7 +116,6 @@ async function loadHeroPhoto(title, alt) {
   }
 }
 
-// ---------- Новости ----------
 function findNews(query) {
   const q = query.toLowerCase();
   return NEWS_DATA.filter((n) =>
@@ -147,7 +133,6 @@ function renderNewsList(items, emptyText) {
     </div>`).join("");
 }
 
-// ---------- Зачёт: пилоты ----------
 function getVisibleDrivers() {
   const rankOf = new Map(DRIVERS.map((d, i) => [d.name, i + 1]));
   const q = state.query.trim().toLowerCase();
@@ -187,7 +172,6 @@ function renderDrivers() {
     : `<p class="muted table-empty">Никого не нашли по запросу.</p>`;
 }
 
-// ---------- Зачёт: команды ----------
 function renderTeams() {
   const leadTeam = TEAMS[0].points || 1;
   $("#teams").innerHTML = TEAMS.map((t, i) => {
@@ -205,7 +189,6 @@ function renderTeams() {
   }).join("");
 }
 
-// ---------- Окно пилота ----------
 function openDriver(name) {
   const d = DRIVERS_2026.find((x) => x.name === name);
   if (!d) return;
@@ -276,7 +259,6 @@ function renderCompare(a, bName) {
     <p class="muted">${verdict}</p>`;
 }
 
-// ---------- Окно команды ----------
 function openTeam(name) {
   const t = TEAMS.find((x) => x.name === name);
   if (!t) return;
@@ -311,7 +293,6 @@ function openTeam(name) {
   loadHeroPhoto(PHOTOS[t.name], t.name);
 }
 
-// ---------- Обратный отсчёт и «гонка идёт» ----------
 function fmtPlace(place, date) {
   const when = date.toLocaleString("ru-RU", {
     timeZone: TZ, day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit"
@@ -375,7 +356,6 @@ function startCountdown() {
   setInterval(tick, 1000);
 }
 
-// ---------- Календарь ----------
 function renderCalendar() {
   const list = CALENDARS[state.season];
   const t = now();
@@ -412,7 +392,6 @@ function renderCalendar() {
     : `<p class="muted">Нет этапов по этому фильтру.</p>`;
 }
 
-// ---------- Карточка трассы ----------
 function openTrack(race) {
   const info = TRACK_INFO[race.name];
   const date = new Date(race.date);
@@ -461,7 +440,6 @@ function openTrack(race) {
   loadHeroPhoto(info?.wiki, race.name);
 }
 
-// ---------- Сезон 2027 ----------
 function renderFuture2027() {
   $("#futureGrid").innerHTML = SEASON_2027_HIGHLIGHTS.map((item) => `
     <article class="future-card">
@@ -471,7 +449,6 @@ function renderFuture2027() {
     </article>`).join("");
 }
 
-// ---------- Новости ----------
 function renderNews() {
   $("#newsGrid").innerHTML = NEWS_DATA.map((n, idx) => `
     <article class="card" data-action="news" data-idx="${idx}" tabindex="0" role="button">
@@ -495,7 +472,6 @@ function openNews(idx) {
     </div>`);
 }
 
-// ---------- Делегирование событий ----------
 function bindActions(root, handler) {
   root.addEventListener("click", (e) => {
     const el = e.target.closest("[data-action]");
@@ -515,7 +491,6 @@ bindActions($("#teams"), (el) => openTeam(el.dataset.id));
 bindActions($("#cal"), (el) => openTrack(CALENDARS[el.dataset.season][Number(el.dataset.idx)]));
 bindActions($("#newsGrid"), (el) => openNews(Number(el.dataset.idx)));
 
-// ---------- Поиск и сортировка пилотов ----------
 $("#driverSearch").addEventListener("input", (e) => {
   state.query = e.target.value;
   renderDrivers();
@@ -527,7 +502,6 @@ $("#driverSort").addEventListener("change", (e) => {
   renderDrivers();
 });
 
-// ---------- Переключатели календаря ----------
 function setActive(group, btn) {
   $$(".filter-btn", group).forEach((b) => {
     const on = b === btn;
@@ -567,7 +541,6 @@ $("#calFilters").addEventListener("click", (e) => {
   renderCalendar();
 });
 
-// ---------- Старт ----------
 applyTheme(state.theme);
 $("#driverSort").value = state.sort;
 syncCalendarControls();
